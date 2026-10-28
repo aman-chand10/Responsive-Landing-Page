@@ -1,4 +1,4 @@
-// Navbar Scroll Effect
+
 window.addEventListener('scroll', function() {
     const header = document.getElementById('navbar');
     if (window.scrollY > 50) {
@@ -8,7 +8,7 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Mobile Responsive Menu Toggle
+
 const mobileMenu = document.getElementById('mobile-menu');
 const navLinks = document.querySelector('.nav-links');
 
@@ -24,7 +24,6 @@ mobileMenu.addEventListener('click', () => {
     }
 });
 
-// Close mobile menu when clicking a link
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
