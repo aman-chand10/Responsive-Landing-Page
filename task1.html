@@ -3,105 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexGen - Responsive Landing Page | Task 01</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Aman Chand | Interactive Navigation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            color: #222;
+        }
+
+    
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #172554;
+            transition: 0.3s ease;
+            z-index: 1000;
+        }
+
+        
+        .navbar.scrolled {
+            background: #0891b2;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+    
+        .nav-links a:hover {
+            background: #facc15;
+            color: #172554;
+            transform: translateY(-2px);
+        }
+
+        
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            background: transparent;
+            border: none;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        
+        section {
+            min-height: 100vh;
+            padding: 120px 10% 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        section h1 {
+            font-size: clamp(32px, 5vw, 55px);
+            margin-bottom: 20px;
+            color: #172554;
+        }
+
+        section p {
+            max-width: 650px;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #475569;
+        }
+
+        #home {
+            background: #e0f2fe;
+        }
+
+        #about {
+            background: #f8fafc;
+        }
+
+        #skills {
+            background: #dbeafe;
+        }
+
+        #projects {
+            background: #fef3c7;
+        }
+
+        #contact {
+            background: #dcfce7;
+        }
+
+        .profile-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .profile-links a {
+            background: #172554;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .profile-links a:hover {
+            background: #0891b2;
+            transform: translateY(-3px);
+        }
+
+
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 16px 5%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                gap: 5px;
+                padding: 15px 5%;
+                background: #172554;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                display: block;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <!-- Interactive Fixed Navigation Menu -->
-    <header id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">Nex<span>Gen</span></a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-        </div>
+   
+    <header class="navbar" id="navbar">
+        <a href="#home" class="logo">Aman Chand</a>
+
+        <button class="menu-toggle"
+                id="menuToggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false"
+                aria-controls="navLinks">
+            ☰
+        </button>
+
+        <nav>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Build Your Digital Future Today</h1>
-            <p>Create stunning, interactive, and fully responsive web experiences with modern design techniques and clean code structure.</p>
-            <div class="hero-btns">
-                <a href="#features" class="btn primary-btn">Get Started</a>
-                <a href="#about" class="btn secondary-btn">Learn More</a>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="floating-card">
-                <i class="fa-solid fa-code"></i>
-                <div>
-                    <h4>Clean Code</h4>
-                    <p>HTML5, CSS3 & JS</p>
-                </div>
-            </div>
+    
+    <section id="home">
+        <h1>Welcome to My Portfolio</h1>
+        <p>
+            Hello! I'm Aman Chand, a BCA student interested in
+            web development and programming. Scroll down to see
+            the interactive navigation menu in action.
+        </p>
+
+        <div class="profile-links">
+            <a href="https://github.com/aman-chand10"
+               target="_blank" rel="noopener noreferrer">
+                GitHub Profile
+            </a>
+
+            <a href="https://www.linkedin.com/in/aman-chand-1a51a2447/"
+               target="_blank" rel="noopener noreferrer">
+                LinkedIn Profile
+            </a>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="section-title">
-            <h2>Amazing Features</h2>
-            <p>Designed with performance and interactivity in mind</p>
-        </div>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <i class="fa-solid fa-mobile-screen-button"></i>
-                <h3>Fully Responsive</h3>
-                <p>Adapts seamlessly across mobile phones, tablets, and desktop displays of all sizes.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                <h3>Interactive Menu</h3>
-                <p>Dynamic navbar styles changes seamlessly on scroll and highlights active items on hover.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-bolt"></i>
-                <h3>High Performance</h3>
-                <p>Lightweight styles and optimized JavaScript ensure lightning-fast load times.</p>
-            </div>
+    
+    <section id="about">
+        <h1>About Me</h1>
+        <p>
+            I am learning programming, web development, and
+            problem-solving. I enjoy creating interactive
+            websites using HTML, CSS, and JavaScript.
+        </p>
+    </section>
+
+    
+    <section id="skills">
+        <h1>My Skills</h1>
+        <p>
+            HTML — webpage structure<br>
+            CSS — styling and responsive layouts<br>
+            JavaScript — interactivity and dynamic behavior
+        </p>
+    </section>
+
+    
+    <section id="projects">
+        <h1>My Projects</h1>
+        <p>
+            Interactive Navigation Menu, Stopwatch Web App,
+            Tic-Tac-Toe Game, and other web development projects.
+        </p>
+    </section>
+
+    
+    <section id="contact">
+        <h1>Contact Me</h1>
+        <p>
+            Connect with me through my professional profiles.
+            Visit my GitHub to explore my projects or LinkedIn
+            to connect professionally.
+        </p>
+
+        <div class="profile-links">
+            <a href="https://github.com/aman-chand10"
+               target="_blank" rel="noopener noreferrer">
+                Visit GitHub
+            </a>
+
+            <a href="https://www.linkedin.com/in/aman-chand-1a51a2447/"
+               target="_blank" rel="noopener noreferrer">
+                Visit LinkedIn
+            </a>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="about-container">
-            <div class="about-text">
-                <h2>About The Project</h2>
-                <p>This project is part of the Web Development Internship task series. It showcases the integration of core front-end languages to build a seamless user experience, responsive grid structures, and interactive DOM manipulation.</p>
-                <a href="#contact" class="btn primary-btn">Connect With Me</a>
-            </div>
-        </div>
-    </section>
+    <script>
+        const navbar = document.getElementById("navbar");
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+        const links = document.querySelectorAll(".nav-links a");
+        const sections = document.querySelectorAll("section");
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-content">
-            <h3>Aman Chand • BCA Internship Portfolio</h3>
-            <p>Task-01: Responsive Landing Page with Interactive Navigation Menu.</p>
-            <ul class="socials">
-                <li><a href="#"><i class="fa-brands fa-github"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-            </ul>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Aman Chand. All Rights Reserved.</p>
-        </div>
-    </footer>
+       
+        window.addEventListener("scroll", function () {
+            navbar.classList.toggle("scrolled", window.scrollY > 50);
 
-    <script src="script.js"></script>
+            
+            let currentSection = "home";
+
+            sections.forEach(function (section) {
+                if (window.scrollY >= section.offsetTop - 150) {
+                    currentSection = section.id;
+                }
+            });
+
+            links.forEach(function (link) {
+                link.classList.toggle(
+                    "active",
+                    link.getAttribute("href") === "#" + currentSection
+                );
+            });
+        });
+
+     
+        menuToggle.addEventListener("click", function () {
+            const isOpen = navLinks.classList.toggle("open");
+
+            menuToggle.setAttribute("aria-expanded", isOpen);
+            menuToggle.textContent = isOpen ? "✕" : "☰";
+        });
+
+
+        links.forEach(function (link) {
+            link.addEventListener("click", function () {
+                navLinks.classList.remove("open");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.textContent = "☰";
+            });
+        });
+    </script>
+
 </body>
 </html>
