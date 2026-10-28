@@ -1,34 +1,48 @@
+const navbar = document.getElementById("navbar");
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
 
-window.addEventListener('scroll', function() {
-    const header = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
+const links = document.querySelectorAll(".nav-links a");
+const sections = document.querySelectorAll("section");
+function handleScroll() {
+    navbar.classList.toggle("scrolled", window.scrollY > 50);
+    let currentSection = "home";
+
+    sections.forEach(function (section) {
+        if (window.scrollY >= section.offsetTop - 150) {
+            currentSection = section.id;
+        }
+    });
+
+    links.forEach(function (link) {
+        const isActive =
+            link.getAttribute("href") === "#" + currentSection;
+
+        link.classList.toggle("active", isActive);
+    });
+}
+
+window.addEventListener("scroll", handleScroll, {
+    passive: true
 });
 
 
-const mobileMenu = document.getElementById('mobile-menu');
-const navLinks = document.querySelector('.nav-links');
+handleScroll();
 
-mobileMenu.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const icon = mobileMenu.querySelector('i');
-    if (navLinks.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-xmark');
-    } else {
-        icon.classList.remove('fa-xmark');
-        icon.classList.add('fa-bars');
-    }
+
+menuToggle.addEventListener("click", function () {
+    const isOpen = navLinks.classList.toggle("open");
+
+    menuToggle.setAttribute("aria-expanded", isOpen);
+    menuToggle.textContent = isOpen ? "✕" : "☰";
 });
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        const icon = mobileMenu.querySelector('i');
-        icon.classList.remove('fa-xmark');
-        icon.classList.add('fa-bars');
+
+links.forEach(function (link) {
+    link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
     });
 });
